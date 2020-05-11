@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="style.css">
     <title>Lista Tareas</title>
 </head>
-<body>
+
+<body onload="getCategorias()">
     <header class="col-s-12 col-8">Lista Tareas</header>
 
     <div class="container col-s-12 col-8">
         <div class="categoria">
             <label for="" class="lbl-category">Categoria</label>
-            <select name="" id="data-categoria" class="data-categoria">
-                <option value="">Default</option>
+            
+            <select name="" id="data-categoria" class="data-categoria" onclick="getByCategoria(this)">
+                <option value="0">Todas</option>
             </select>
         </div>
         
@@ -24,5 +26,7 @@
         <label for="" class="name">Ibarra Cuevas Dennise Monserrath</label>
         <label for="" class="cve">279236</label>
     </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>

@@ -1,14 +1,46 @@
 <?php
 
-require_once("DB.php");
-require_once("Categoria.php");
+ //require_once("Models/DB.php");
+// require_once("Categoria.php");
 
-function get() {
-    $db = new connect();
-    $db.dbConnect();
+class connect {
+    public function dbConnect() {
+        try {
+            $dns = 'mysql:host=localhost;dbname=lista_tareas';
+            $username = 'root';
+            $password = '';
+            
+            $dbTareas = new PDO($dns, $username, $password);
+        
+            return $dbTareas;
+        }
+        catch(PDOExeption $e) {
+            echo 'Error'. $e;
+        }
+        
+    }
+}
+
+class Categoria{
+    public $_id;
+    public $_nombre;
+
+    //Todos los constructores tendran el nombre por default de constructor
+    public function __construct($id, $nombre) {
+        $this->_id = $id;
+        $this->_nombre = $nombre;
+    }
+}
+
+try {
+    $dns = 'mysql:host=localhost;dbname=lista_tareas';
+    $username = 'root';
+    $password = '';
+    
+    $dbTareas = new PDO($dns, $username, $password);
 
     $query = "SELECT * FROM categorias";
-    $response = $db->prepare($query);
+    $response = $dbTareas->prepare($query);
     $response->execute();
 
     $categorias = array();
@@ -19,7 +51,12 @@ function get() {
     }
 
     $jsonResponse = json_encode($categorias);
-    return $jsonResponse;
+
+    echo $jsonResponse;
+
+}
+catch(PDOExeption $e) {
+    echo 'Error'. $e;
 }
 
 ?>
