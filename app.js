@@ -1,0 +1,1 @@
+document.getElementById('data-categoria').addEventListener("change", getCategorias);
